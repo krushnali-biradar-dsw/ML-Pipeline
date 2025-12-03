@@ -1,0 +1,1 @@
+simple-linear-model/model.joblib

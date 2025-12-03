@@ -1,0 +1,28 @@
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  name: simple-ml-model
+  namespace: default
+spec:
+  predictors:
+  - name: default
+    replicas: 1
+    graph:
+      name: linear-model
+      implementation: SKLEARN_SERVER
+      modelUri: s3://mlflow-artifacts/[MODEL_PATH_FROM_MLFLOW]
+      envSecretRefName: seldon-init-container-secret
+      env:
+        - name: MLFLOW_S3_ENDPOINT_URL
+          value: "http://host.minikube.internal:9000"
+    componentSpecs:
+    - spec:
+        containers:
+        - name: linear-model
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
