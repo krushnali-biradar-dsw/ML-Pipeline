@@ -1,4 +1,4 @@
-# Linear Pipeline
+# MLOPS Pipeline
 
 Small end-to-end ML pipeline that demonstrates training, artifact storage (MinIO), MLflow tracking, and model serving (Seldon Core / local test server).
 
